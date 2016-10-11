@@ -18,51 +18,63 @@
                   ]).
 
 %% API
--export([total_words/1,
-         mean_words/1,
-         grep/2,
-         reverse_index/1
+-export([total_words/0,
+         mean_words/0%,
+         % grep/0,
+         % reverse_index/0
         ]).
 
 
 %%% -on_load(test()).  %%% run tests on load.
 
+-define(TEST_DATA, do_all("data/mxm_dataset_test.txt")).
+-define(TRAIN_DATA, do_all("data/mxm_dataset_train.txt")).
 
+total_words() ->
+    % Compute the total number of words, summed over all the songs.
 
+    {_, Bins} = ?TEST_DATA,
+    {_, _, SongWordCounts} = lists:unzip3(Bins),
+    FlatData = lists:flatten(SongWordCounts),
 
+    MapFun = fun({_,Count}) -> Count end,
+    ReduceFun = fun(N, Sum) -> Sum + N end,
+    Acc0 = 0,
 
-
-%%% Compute the total number of words, summed over all the songs.
-total_words(Data) ->
-    % extract the data needed
-    {Words, Bins} = do_all(),
-    {Track_id, MXM_id, WordIndexCount} = Bins,
-    {Index, Count} = lists:unzip(WordIndexCount),
-    SumWords = fun(Elem, Acc) -> Elem + Acc end,
-
-    % map-reduce
-    lists:foldl(SumList, 0, Count).
-
-
+    CountsOnly = lists:map(MapFun, FlatData),
+    lists:foldl(ReduceFun, Acc0, CountsOnly).
 
 
 %%% Computes the mean (average) number of unique words in a song
+%       so really the length of the sublist in SongWordCounts
+
 %%% Computes the mean total number of words in a song
+%       so the sum of the counts for each sublist....
+
 %%% Computes the standard deviation of each mean
 %%%
 %%% sigma = sqrt( 1/N  *  sum(i=[1..N], (x_i - mean)^2  )
-%%%
-mean_words(Data) -> true.
+
+mean_words() ->
+    {_, Bins} = ?TEST_DATA,
+    {_, _, WordCountsPerSong} = lists:unzip3(Bins),
+
+    MapFun1    = fun(SubList) -> length(SubList) end,
+    ReduceFun1 = fun(N, Sum) -> Sum + N end,
+    NumSongs = length(WordCountsPerSong),
+
+    UniqueWordsPerSong = lists:map(MapFun1, WordCountsPerSong),
+    UniqueWords = lists:foldl(ReduceFun1, 0, UniqueWordsPerSong),
+
+    Avg_UniqueWords = UniqueWords / NumSongs.
+
+    MapFun2 = fun(SubList) ->
+
+
+
+% grep(Word, Data) -> true.
 
 
 
 
-
-grep(Word, Data) -> true.
-
-reverse_index(Data) -> true.
-
-
-
-
-
+% reverse_index(Data) -> true.
