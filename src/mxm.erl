@@ -32,10 +32,31 @@
 
 
 
+%%% Compute the total number of words, summed over all the songs.
+total_words(Data) ->
+    % extract the data needed
+    {Words, Bins} = do_all(),
+    {Track_id, MXM_id, WordIndexCount} = Bins,
+    {Index, Count} = lists:unzip(WordIndexCount),
+    SumWords = fun(Elem, Acc) -> Elem + Acc end,
 
-total_words(Data) -> true.
+    % map-reduce
+    lists:foldl(SumList, 0, Count).
 
+
+
+
+%%% Computes the mean (average) number of unique words in a song
+%%% Computes the mean total number of words in a song
+%%% Computes the standard deviation of each mean
+%%%
+%%% sigma = sqrt( 1/N  *  sum(i=[1..N], (x_i - mean)^2  )
+%%%
 mean_words(Data) -> true.
+
+
+
+
 
 grep(Word, Data) -> true.
 
