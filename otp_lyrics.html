@@ -1,0 +1,272 @@
+<html xmlns:html="http://www.w3.org/1999/xhtml"><head>
+  <meta charset="utf-8" />
+  <meta content="pandoc" name="generator" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport" />
+  <meta content="Ken Friis Larsen (kflarsen@diku.dk) and Oleksandr Shturmov (oleks@oleks.info)" name="author" />
+  <title>Remember that song?</title>
+  <style>
+code{white-space: pre;}
+</style>
+<style>
+
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  
+</style>
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Source+Serif+Pro|Oswald|Source+Code+Pro" rel="stylesheet" />
+  <style type="text/css">
+body {
+    margin-top: 1.0em;
+    background-color: white;
+/*    font-family: 'Gentium Book Basic', sans-serif;
+   font-size: 1.143em;
+*/    font-size: 13pt;
+    color: black;
+    width: 90%;
+    margin: 0 auto;
+}
+
+html {
+  font-family: "Source Serif Pro", Georgia, "Times New Roman", serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Oswald", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: #313131;
+  letter-spacing: -.025rem;
+}
+
+code {
+   font-family: "Source Code Pro", Menlo, monospace;
+/*   font-size: 1.136em;
+    font-size: 13pt;;  
+*/   background-color: #F0F3F3;
+
+}
+
+pre {
+   background-color: #F0F3F3;
+   padding: 6px;
+   word-wrap: break-word;
+   white-space: pre-wrap;
+   font-family: "Source Code Pro", Menlo, monospace;
+   border: 1px solid silver;
+/*    font-size: 15pt;
+*/}
+
+h1.title {
+    font-family: 'Dancing Script', sans-serif;
+    text-align: center; font-size: 3.8em; color: black; margin-bottom: 3px;
+}
+h1 .small { font-size: 0.4em; }
+h1 a { text-decoration: none }
+h2 { font-size: 1.5em; color: black; }
+h2.author { font-size: 1em; text-align: center; color: black; }
+h3.date {  font-size: 1em; text-align: center; color: black; }
+a { color: black; }
+.description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+.download { float: right; }
+/* pre { background: #000; color: #fff; padding: 15px;} */
+hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+.footer { text-align:center; padding-top:30px; font-style: italic; }
+table   { border-collapse: collapse }
+td { border: 1px solid black }
+
+
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Remember that song?</h1>
+<h2 class="author">Ken Friis Larsen <code>(kflarsen@diku.dk)</code> and Oleksandr Shturmov <code>(oleks@oleks.info)</code></h2>
+<h3 class="date">Last updated: October 10, 2016</h3>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#objective">Objective</a></li>
+<li><a href="#what-to-hand-in">What to hand in</a></li>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#part-1-map-reduce-library">Part 1: Map-Reduce Library</a><ul>
+<li><a href="#api-for-the-master">API for the Master</a></li>
+<li><a href="#example-usage">Example Usage</a></li>
+</ul></li>
+<li><a href="#part-2-musicxmatch-dataset">Part 2: MusicXMatch Dataset</a><ul>
+<li><a href="#getting-the-data">Getting the data</a></li>
+<li><a href="#tasks">Tasks</a></li>
+</ul></li>
+<li><a href="#hints">Hints</a></li>
+<li><a href="#part-3-extensions-optional">Part 3: Extensions (Optional)</a></li>
+</ul>
+</nav>
+<h2 id="objective">Objective</h2>
+<p>The objective of this assignment is to gain hands-on programming experience with Erlang and to get an understanding of how to implement map-reduce algorithms.</p>
+<p>The goal is to implement a simple map-reduce library, using the OTP framework. Then use the map-reduce library to process the <a href="http://labrosa.ee.columbia.edu/millionsong/musixmatch"><em>musiXmatch dataset</em></a> (mxm), the official collection of lyrics from the <a href="http://labrosa.ee.columbia.edu/millionsong">Million Song Dataset</a>.</p>
+<p>The assignment consists of three parts:</p>
+<ul>
+<li>Part 1: Implementing a Map-Reduce library, that is independent of mxm.</li>
+<li>Part 2: Use your library to implement some simple algorithms processing the mxm dataset.</li>
+<li>Part 3: Suggestions for various extensions. This part is <strong>optional</strong>, it will have no influence whatsoever on your grading.</li>
+</ul>
+<h2 id="what-to-hand-in">What to hand in</h2>
+<p>You should hand in two things:</p>
+<ol type="1">
+<li><p>A short report, <code>report.pdf</code>, explaining your code, and containing an assessment of your implementation, including what this assessment is based upon. In the report, you should also argue that:</p>
+<ol type="a">
+<li>You are sending the right number of messages around.</li>
+<li>Your code cannot get into a deadlock.</li>
+<li>The right parts of the API are blocking/non-blocking.</li>
+<li>In-how-far does Part 2 test your implementation in Part 1? Do you test the rest?</li>
+</ol></li>
+<li><p>A ZIP archive <code>src.zip</code>, containing one directory <code>src</code>, containing your source code and tests. Your implementation of the <code>mr</code> and <code>mxm</code> modules (thus in files called <code>mr.erl</code> and <code>mxm.erl</code>, respectively) and the code you have used to test your module in other file(s).</p></li>
+<li><p>Do <em>not</em> submit the dataset along with your code.</p></li>
+</ol>
+<p>Make sure that you adhere to the types of the API, and test that you do.</p>
+<p>To keep your TA happy, follow these simple rules:</p>
+<ol type="1">
+<li>The Erlang compiler, with the parameter <code>-Wall</code>, should not yield any errors or warnings for your code.</li>
+<li>You should comment your code properly, especially if you doubt its correctness, or if you think there might be a more elegant way to write a certain piece of code. A good comment should explain your ideas and provide insight.</li>
+<li>Adhere to the restrictions set in the assignment text, and make sure that you export all of the requested API (even if some functions only have a dummy implementation).</li>
+<li>Describe clearly what parts of the assignment you have solved.</li>
+</ol>
+<h2 id="scope">Scope</h2>
+<p>The following topics are not within the scope of this assignment:</p>
+<ul>
+<li>Network reliability.</li>
+<li>Absolute performance.</li>
+</ul>
+<p>You must, however, ensure that processes do not fail because of uncaught exceptions; both from your implementations and from calling map or reduce functions.</p>
+<h2 id="part-1-map-reduce-library">Part 1: Map-Reduce Library</h2>
+<p>As entry-point for the library we only want to communicate with a single master process, which in turn will take care of starting a number of worker processes for the mapping and reducing phases.</p>
+<p>Thus, in the library there ought to be two kinds of processes:</p>
+<ol type="1">
+<li><p>A single <em>master</em> that serves as the entry-point for the library.</p></li>
+<li><p>A pool of <em>workers</em> that takes care of the actual work in the map and reduce phases.</p></li>
+</ol>
+<p>The master and workers must be implemented using the OTP framework, that is using the <em>generic server</em> behaviour (<code>gen_server</code>) or one of the <em>finite state machine</em> behaviours (<code>gen_fsm</code> or <code>gen_statem</code>). See the <a href="http://erlang.org/doc/design_principles/des_princ.html">OTP Design Principles User&#8217;s Guide</a> for more information. For a basic solution, you don&#8217;t have to worry about using OTP supervisors.</p>
+<p>It is best to structure your code so that the master and worker processes have separate callback modules.</p>
+<h3 id="api-for-the-master">API for the Master</h3>
+<p>The API for the master should be exposed from a module called <code>mr</code>. The module should export three functions:</p>
+<ul>
+<li><p>A function <code>start()</code> for starting a master. <code>start/0</code> should return <code>{ok, Pid}</code> if the start is successful, where <code>Pid</code> is the process ID of the started master, or <code>{error, Reason}</code> if an error occurred, where <code>Reason</code> can be any Erlang term.</p></li>
+<li><p>A function <code>job(Pid, NWorkers, MapFun, RedFun, Initial, Data)</code> for performing a Map-Reduce job. The function should block and yield the fully reduced result when it is ready.</p>
+<p><code>Pid</code> is process ID of a master, <code>NWorkers</code> is the number of workers, <code>MapFun</code> is the function that the mappers should perform, <code>RedFun</code> is a parametrized function for the reducers to perform (see below), <code>Initial</code> is the initial value for the computation, and <code>Data</code> the data that the mappers should be mapped over. The function should return <code>{ok, Result}</code> if it succeeds.</p>
+<p>The arguments should have the following types (here using Erlang type-spec syntax):</p>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang"><span class="dt">MapFun</span>  <span class="fu">::</span> <span class="kw">fun</span><span class="fu">(</span><span class="dt">A</span> <span class="kw">-&gt;</span> <span class="dt">B</span><span class="fu">)</span>
+<span class="dt">RedFun</span>  <span class="fu">::</span> <span class="fu">{</span><span class="kw">fun</span><span class="fu">((</span><span class="dt">B</span><span class="fu">,</span> <span class="dt">Res</span><span class="fu">)</span> <span class="kw">-&gt;</span> <span class="dt">Res</span><span class="fu">),</span> <span class="dt">Mode</span><span class="fu">}</span>
+
+<span class="dt">Initial</span> <span class="fu">::</span> <span class="dt">Res</span>
+<span class="dt">Data</span>    <span class="fu">::</span> <span class="fu">[</span><span class="dt">A</span><span class="fu">]</span>
+<span class="dt">Mode</span>    <span class="fu">::</span> <span class="ch">single</span> <span class="fu">|</span> <span class="ch">multi</span></code></pre></div>
+<p>If <code>Mode</code> is <code>single</code> then there should be only a single reducer. Otherwise, if <code>Mode</code> is <code>multi</code>, we assume and can exploit that the given function is <em>commutative</em> and <em>associative</em>, which means that we can have multiple reducers.</p>
+<p>A binary function <code>f</code> is commutative and associative if it satisfies the following properties:</p>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang"><span class="fu">f(</span><span class="ch">x</span><span class="fu">,</span> <span class="ch">y</span><span class="fu">)</span>       <span class="kw">=:=</span> <span class="fu">f(</span><span class="ch">y</span><span class="fu">,</span> <span class="ch">x</span><span class="fu">)</span>
+<span class="fu">f(</span><span class="ch">x</span><span class="fu">,</span> <span class="fu">f(</span><span class="ch">y</span><span class="fu">,</span> <span class="ch">z</span><span class="fu">))</span> <span class="kw">=:=</span> <span class="fu">f(f(</span><span class="ch">x</span><span class="fu">,</span> <span class="ch">y</span><span class="fu">),</span> <span class="ch">z</span><span class="fu">)</span></code></pre></div>
+<p>(which means that <code>Res</code> and <code>B</code> must be the same type, in the types above.)</p>
+<p>How you split the <code>NWorkers</code> workers into mappers and reducers is up to you. You can assume that <code>NWorkers</code> is a positive number.</p>
+<p>If you have trouble supporting multiple reducers, you can start by having just one reducer, effectively ignoring the <code>Mode</code> argument.</p></li>
+<li><p>A function <code>stop(Pid)</code> for stopping the master and all worker processes for that master.</p></li>
+</ul>
+<h3 id="example-usage">Example Usage</h3>
+<p>The following example shows how to use the library for adding the numbers 1 to 10, and for finding the factorial of 20.</p>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang">    <span class="fu">simple_test()</span> <span class="kw">-&gt;</span>
+        <span class="fu">{</span><span class="ch">ok</span><span class="fu">,</span> <span class="dt">MR</span><span class="fu">}</span>  <span class="kw">=</span> <span class="fu">mr:start(),</span>
+        <span class="fu">{</span><span class="ch">ok</span><span class="fu">,</span> <span class="dt">Sum</span><span class="fu">}</span> <span class="kw">=</span> <span class="fu">mr:job(</span><span class="dt">MR</span><span class="fu">,</span>
+                           <span class="dv">3</span><span class="fu">,</span>
+                           <span class="kw">fun</span><span class="fu">(</span><span class="dt">X</span><span class="fu">)</span> <span class="kw">-&gt;</span> <span class="dt">X</span> <span class="kw">end</span><span class="fu">,</span>
+                           <span class="fu">{</span><span class="kw">fun</span><span class="fu">(</span><span class="dt">X</span><span class="fu">,</span> <span class="dt">Acc</span><span class="fu">)</span> <span class="kw">-&gt;</span> <span class="dt">X</span> <span class="kw">+</span> <span class="dt">Acc</span> <span class="kw">end</span><span class="fu">,</span> <span class="ch">multi</span><span class="fu">},</span>
+                           <span class="dv">0</span><span class="fu">,</span>
+                           <span class="fu">lists:seq(</span><span class="dv">1</span><span class="fu">,</span><span class="dv">10</span><span class="fu">)),</span>
+        <span class="fu">{</span><span class="ch">ok</span><span class="fu">,</span> <span class="dt">Fac</span><span class="fu">}</span> <span class="kw">=</span> <span class="fu">mr:job(</span><span class="dt">MR</span><span class="fu">,</span>
+                           <span class="dv">4</span><span class="fu">,</span>
+                           <span class="kw">fun</span><span class="fu">(</span><span class="dt">X</span><span class="fu">)</span> <span class="kw">-&gt;</span> <span class="dt">X</span> <span class="kw">end</span><span class="fu">,</span>
+                           <span class="fu">{</span><span class="kw">fun</span><span class="fu">(</span><span class="dt">X</span><span class="fu">,</span> <span class="dt">Acc</span><span class="fu">)</span> <span class="kw">-&gt;</span> <span class="dt">X</span> <span class="kw">*</span> <span class="dt">Acc</span> <span class="kw">end</span><span class="fu">,</span> <span class="ch">multi</span><span class="fu">},</span>
+                           <span class="dv">1</span><span class="fu">,</span>
+                           <span class="fu">lists:seq(</span><span class="dv">1</span><span class="fu">,</span><span class="dv">20</span><span class="fu">)),</span>
+        <span class="fu">mr:stop(</span><span class="dt">MR</span><span class="fu">),</span>
+        <span class="fu">{</span><span class="dt">Sum</span><span class="fu">,</span> <span class="dt">Fac</span><span class="fu">}.</span></code></pre></div>
+<h2 id="part-2-musicxmatch-dataset">Part 2: MusicXMatch Dataset</h2>
+<p>The <a href="http://labrosa.ee.columbia.edu/millionsong/musixmatch"><em>musiXmatch dataset</em></a> (mxm) is the official collection of lyrics from the <a href="http://labrosa.ee.columbia.edu/millionsong">Million Song Dataset</a> (MSD). The dataset comes in two text files, describing training and test sets in bag-of-words format: each track is described as the word-counts for a dictionary of the top 5,000 words, and a third text file providing matches by mxm based on artist names and song titles from MSD.</p>
+<h3 id="getting-the-data">Getting the data</h3>
+<ul>
+<li>The cut down test version of the bag-of-words: <a class="uri" href="http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_test.txt.zip">http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_test.txt.zip</a></li>
+<li>The full version of the bag-of-words: <a class="uri" href="http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_train.txt.zip">http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_train.txt.zip</a></li>
+<li>The matching with MSD: <a class="uri" href="http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_779k_matches.txt.zip">http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_779k_matches.txt.zip</a></li>
+</ul>
+<p>The only difference between the test and training data sets wrt. this assignment is that the test data set is smaller, and hence faster to process.</p>
+<p>If you have <code>wget</code> on your machine you can use the commands:</p>
+<pre><code>wget http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_test.txt.zip
+wget http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_dataset_train.txt.zip
+wget http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/mxm_779k_matches.txt.zip</code></pre>
+<p>You can use the provided <a href="read_mxm.erl"><code>read_mxm</code></a> (<a href="read_mxm.html">documentation</a>) module to read in the bag-of-words datasets.</p>
+<h3 id="tasks">Tasks</h3>
+<p>Write a module <code>mxm</code>, defining a function for each of the following tasks (except the last). The details of the API are intentionally left unspecified, but it should be possible to reproduce your results by running your code.</p>
+<p>You should use the <code>mr</code> library and the bag-of-words dataset from above. You are free to choose whether you report these for the test or training data set, or both.</p>
+<ol type="1">
+<li><p>Compute the total number of words, summed over all the songs.</p></li>
+<li><p>Compute the mean (average) number of unique words in a song <em>and</em> the mean total number of words in a song.</p>
+<p>Give some intuition about the quality of your means. A typical technique is to compute the <a href="https://en.wikipedia.org/wiki/Standard_deviation">standard deviation</a>.</p></li>
+<li><p>Make a function <code>grep</code> that for a given word can find the MSD track IDs for all songs with that word.</p>
+<p>When testing, remember that the words in the dataset are <a href="https://en.wikipedia.org/wiki/Stemming">stemmed</a>. mxm <a href="http://labrosa.ee.columbia.edu/millionsong/sites/default/files/mxm_reverse_mapping.txt">does provide</a> <em>one possible</em> reverse mapping from stemmed to unstemmed words.</p></li>
+<li><p>Compute a reverse index: a mapping (as a <code>dict</code>) from words to songs where they occur.</p></li>
+<li><p>Discuss (shortly) advantages and disadvantages of using a reverse index over the <code>grep</code> function for further queries.</p></li>
+</ol>
+<h2 id="hints">Hints</h2>
+<ul>
+<li><p>If you want to start with Part 2 before making Part 1, it&#8217;s relatively straightforward to implement a sequential version of the <code>mr</code> module, using the <code>map</code> and <code>foldl</code> functions from the <code>lists</code> module.</p></li>
+<li><p>For Part 1, start by analysing which behaviour makes sense to use for the different parts of the library. For the parts where it makes sense to use a state machine (if any), design the state machine (states and transistions) and define what action/message triggers the transition from one state to the next. (Whether you should use <code>gen_fsm</code> or <code>gen_statem</code> depends on which version of Erlang you have installed: if you have v19 or newer (recommended) then use <code>gen_statem</code>, otherwise use <code>gen_fsm</code>). Then think about which messages the different kinds of processes should send to each other and what information these messages should contain. Finally design a representation of these messages.</p></li>
+<li><p>Make yourself familiar with the <a href="http://www.erlang.org/doc/man/lists.html">manual page for <code>lists</code></a>, the <a href="http://www.erlang.org/doc/man/dict.html">manual page for <code>dict</code></a> and the <a href="http://www.erlang.org/doc/man/maps.html">manual page for <code>maps</code></a> for information about functions in the <code>lists</code>, <code>dict</code>, and <code>maps</code> modules.</p></li>
+<li><p>If you want to time a function, the <a href="http://www.erlang.org/doc/man/timer.html#tc-2"><code>timer:tc</code> function</a> comes handy.</p></li>
+<li><p>While developing the program I&#8217;ve found it helpful to use <code>io:format</code> to print various information to the console. For example, my master process had the following line for a while:</p>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang"> <span class="fu">io:format(</span><span class="st">"~p is master with the workers ~p ~n"</span><span class="fu">,</span> <span class="fu">[self(),</span> <span class="dt">Workers</span><span class="fu">]),</span></code></pre></div>
+<p>(Yes, it&#8217;s a side-effect, alas it&#8217;s useful.) See the <a href="http://www.erlang.org/doc/man/io.html">manual page for the <code>io</code> module</a> for more information about control sequences available in the format string (like <code>~p</code> in the example). Remember to remove debug printing in your final hand-in.</p></li>
+</ul>
+<h2 id="part-3-extensions-optional">Part 3: Extensions (Optional)</h2>
+<p>Here are some suggestions for extensions to the assignment, in no particular order.</p>
+<p><!-- * **Contest:** Suggest interesting queries/computations you can --> <!--   perform over the dataset. The best suggestion(s) will be awarded a --> <!--   price (queries with accompanying correct implementations will be --> <!--   ranked higher). The size of the price is determined by the --> <!--   interestingness of the query (judged by Ken). TAs can participate --> <!--   in the contest, but are held to higher standards. --></p>
+<p><!-- * The library only have a single reducer, extend the library so --> <!--   that there is a fixed pool of reducers. Start by thinking about --> <!--   how the types/API for `start` and `job` should be changed. --></p>
+<ul>
+<li><p>Currently the initial reading in and splitting of data is done sequentially. Change that so that the splitting is done concurrently with the processing. (You&#8217;ll need to get intimate with the <a href="http://www.erlang.org/doc/man/binary.html"><code>binary</code> module</a>.)</p></li>
+<li><p>No library-wide error handling is required for Part 1 or 2. Use the techniques taught in the course for making your code more robust. For example, set up supervisor(s) for the mappers and reducers, so that (i) if one of worker processes fails they should all fail, or (ii) if one of the mappers fails the master is told about the error and can decide how to handle it, or (iii) something else that you think makes sense.</p></li>
+<li><p>Extend the API so that it is possible to start the master with a list of Erlang nodes as argument, which then starts the workers evenly distributed on these nodes. Thus enabling the work to be distributed on several machines.</p></li>
+</ul>
+<p>End of assignment text.</p>
+
+
+</body></html>
