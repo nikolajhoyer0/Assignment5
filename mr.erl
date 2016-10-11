@@ -1,9 +1,10 @@
 -module(mr).
 -export([start/0,
          job/6,
-         stop/1]).
+         stop/1,
+         simple_test/0]).
 
-start() -> ok.
+start() -> {ok, self()}.
 
 %%%
 %%% MapFun  :: fun(A -> B)
@@ -12,6 +13,10 @@ start() -> ok.
 %%% Data    :: [A]
 %%% Mode    :: single | multi
 %%%
-job(Pid, NWorkers, MapFun, RedFun, Initial, Data) -> ok.
+job(Pid, NWorkers, MapFun, RedInput, Initial, Data) ->
+    {RedFun, Method} = RedInput,
+    Map = lists:map(MapFun, Data),
+    Reduce = lists:foldl(RedFun, Initial, Map),
+    {ok, Reduce}.
 
 stop(Pid) -> ok.
