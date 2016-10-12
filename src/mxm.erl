@@ -18,9 +18,9 @@
                   ]).
 
 %% API
--export([total_words/0,
-         mean_words/0%,
-         % grep/0,
+-export([total_words/1,
+         mean_words/0,
+         grep/2
          % reverse_index/0
         ]).
 
@@ -30,19 +30,22 @@
 -define(TEST_DATA, do_all("data/mxm_dataset_test.txt")).
 -define(TRAIN_DATA, do_all("data/mxm_dataset_train.txt")).
 
-total_words() ->
-    % Compute the total number of words, summed over all the songs.
 
-    {_, Bins} = ?TEST_DATA,
-    {_, _, SongWordCounts} = lists:unzip3(Bins),
-    FlatData = lists:flatten(SongWordCounts),
+% Compute the total number of words, summed over all the songs.
+%    Data   : [Int]
+%    Output :  Int
+total_words(Data) ->
 
-    MapFun = fun({_,Count}) -> Count end,
-    ReduceFun = fun(N, Sum) -> Sum + N end,
-    Acc0 = 0,
+    % {_, Bins} = ?TEST_DATA,
+    % {_, _, SongWordCounts} = lists:unzip3(Bins),
+    % FlatData = lists:flatten(SongWordCounts),
 
-    CountsOnly = lists:map(MapFun, FlatData),
-    lists:foldl(ReduceFun, Acc0, CountsOnly).
+    MapFun    = fun({_,Count}) -> Count end,
+    ReduceFun = fun(Val, SumAcc) -> SumAcc + Val end,
+    Initial = 0,
+
+    CountsOnly = lists:map(MapFun, Data),
+    lists:foldl(ReduceFun, Initial, CountsOnly).
 
 
 %%% Computes the mean (average) number of unique words in a song
@@ -50,31 +53,86 @@ total_words() ->
 
 %%% Computes the mean total number of words in a song
 %       so the sum of the counts for each sublist....
-
-%%% Computes the standard deviation of each mean
-%%%
-%%% sigma = sqrt( 1/N  *  sum(i=[1..N], (x_i - mean)^2  )
-
 mean_words() ->
     {_, Bins} = ?TEST_DATA,
     {_, _, WordCountsPerSong} = lists:unzip3(Bins),
-
-    MapFun1    = fun(SubList) -> length(SubList) end,
-    ReduceFun1 = fun(N, Sum) -> Sum + N end,
-    NumSongs = length(WordCountsPerSong),
-
-    UniqueWordsPerSong = lists:map(MapFun1, WordCountsPerSong),
-    UniqueWords = lists:foldl(ReduceFun1, 0, UniqueWordsPerSong),
-
-    Avg_UniqueWords = UniqueWords / NumSongs.
-
-    MapFun2 = fun(SubList) ->
+    {mean_unique_words(WordCountsPerSong), mean_total_words(WordCountsPerSong)}.
 
 
+% Each sublist in WordCountsPerSong represents the WordIndex -> WordCount
+% mapping for the words in the data set. Therefore, we know that each
+% element in the list represents a unique word. So taking the length of a
+% sublist represents the number of unique words for that song.
+mean_unique_words(Data) ->
+    N = length(Data),
+    MapFun = fun(SubList) -> length(SubList) end,
+    Values = lists:map(MapFun, Data),
+    ReduceFun = fun(Value, SumAcc) -> SumAcc + Value end,
+    Initial = 0,
+    Sum = lists:foldl(ReduceFun, Initial, Values),
+    Mean = Sum / N,
+    SD = standard_deviation(Mean, Values),
+    {Mean, SD}.
 
-% grep(Word, Data) -> true.
+
+% Each sublist in WordCountsPerSong represents the WordIndex -> WordCount
+% mapping for the words in the data set. Therefore, we can extract the
+% WordCounts and sum them in order to find the total number of words for a
+% song.
+mean_total_words(Data) ->
+    N = length(Data),
+    MapFun = fun(SubList) -> total_words(SubList) end,
+    ReduceFun = fun(Value, SumAcc) -> SumAcc + Value end,
+    Initial = 0,
+    Values = lists:map(MapFun, Data),
+    Sum = lists:foldl(ReduceFun, Initial, Values),
+    Mean = Sum / N,
+    SD = standard_deviation(Mean, Values),
+    {Mean, SD}.
+
+%%% Computes the standard deviation of each mean
+%%% sigma = sqrt( 1/N  *  sum(i=[1..N], (x_i - mean)^2  )
+standard_deviation(Mean, Values) ->
+    N = length(Values),
+    MapFun = fun(Val) -> Diff = Val - Mean,
+                         math:pow(Diff, 2)
+                         end,
+    Values = lists:map(MapFun, Values),  % Variance
+    ReduceFun = fun(SD, SumAcc) -> SumAcc + SD end,
+    Initial = 0,
+    Sum = lists:foldl(ReduceFun, Initial, Values),
+    math:sqrt( (1/N) * Sum ).  % Sigma
+
+
+
+%    Make a function grep that for a given word can find the mxm_track IDs for all songs with that word.
+% When testing, remember that the words in the dataset are stemmed. mxm does provide one possible reverse mapping from stemmed to unstemmed words.
+
+
+% ASSUMPTION FOR TESTING, IGNORE STEMMING!
+grep(Word, DataSet) ->
+    {WordList, Bins} = read_mxm:do_all(DataSet),
+    % case lists:member(Word, WordList) of
+    %   true  -> ok;
+    %   false -> {error, Word}
+    % end,
+    NotWord = fun(Elem) -> Elem /= Word end,
+    Index = length(lists:takewhile(NotWord, WordList)) + 1,
+    MapFun = fun({Id, _, WCList}) ->
+                 case lists:keymember(Index, 1, WCList) of
+                     true  -> {hit, [Id]};
+                     false -> {miss, none}
+                 end
+             end,
+    ReduceFun = fun({hit, Id}, Tracks) -> lists:append(Tracks, Id);
+                   ({miss, none}, Tracks) -> Tracks
+                end,
+    Initial = [],
+    Hits = lists:map(MapFun, Bins),
+    lists:foldl(ReduceFun, Initial, Hits).
 
 
 
 
+% Compute a reverse index: a mapping (as a dict) from words to songs where they occur.
 % reverse_index(Data) -> true.
