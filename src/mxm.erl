@@ -20,8 +20,8 @@
 %% API
 -export([total_words/1,
          mean_words/0,
-         grep/2
-         % reverse_index/0
+         grep/2,
+         reverse_index/1
         ]).
 
 
@@ -111,7 +111,7 @@ standard_deviation(Mean, Values) ->
 
 % ASSUMPTION FOR TESTING, IGNORE STEMMING!
 grep(Word, DataSet) ->
-    {WordList, Bins} = read_mxm:do_all(DataSet),
+    {WordList, Bins} = DataSet,
     % case lists:member(Word, WordList) of
     %   true  -> ok;
     %   false -> {error, Word}
@@ -133,6 +133,20 @@ grep(Word, DataSet) ->
 
 
 
-
 % Compute a reverse index: a mapping (as a dict) from words to songs where they occur.
-% reverse_index(Data) -> true.
+% DON'T TEST WITH A SINGLE PROCESS... TAKES +1.5 HOURS
+reverse_index(DataSet) ->
+    {WordList, Bins} = DataSet,
+
+    MapFun = fun(Word) -> {Word, grep(Word, DataSet)} end,
+    ReduceFun = fun(Tuple) -> Tuple end,
+
+    KeyValuePairs = lists:map(MapFun, WordList),
+    KeyValuePairs.
+
+
+% c(mxm).
+% c(read_mxm).
+% {W,B} = read_mxm:do_all("data/mxm_dataset_test.txt").
+% BB = lists:sublist(B, 5).
+% mxm:reverse_index({W,BB}).
