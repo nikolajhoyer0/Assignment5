@@ -1,0 +1,6 @@
+Part 1
+
+1     master process
+many  worker processes
+
+think of parallelism as a tree.

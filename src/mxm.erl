@@ -97,10 +97,10 @@ standard_deviation(Mean, Values) ->
     MapFun = fun(Val) -> Diff = Val - Mean,
                          math:pow(Diff, 2)
                          end,
-    Values = lists:map(MapFun, Values),  % Variance
+    Values2 = lists:map(MapFun, Values),  % Variance
     ReduceFun = fun(SD, SumAcc) -> SumAcc + SD end,
     Initial = 0,
-    Sum = lists:foldl(ReduceFun, Initial, Values),
+    Sum = lists:foldl(ReduceFun, Initial, Values2),
     math:sqrt( (1/N) * Sum ).  % Sigma
 
 
