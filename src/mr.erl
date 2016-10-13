@@ -1,22 +1,12 @@
 -module(mr).
--export([start/0,
-         job/6,
-         stop/1,
-         simple_test/0]).
+-export([start/0, job/6, stop/1]).
 
-start() -> {ok, self()}.
+%%% Entry point for the application
+start() ->
+    master:start().
 
-%%%
-%%% MapFun  :: fun(A -> B)
-%%% RedFun  :: {fun((B, Res) -> Res), Mode}
-%%% Initial :: Res
-%%% Data    :: [A]
-%%% Mode    :: single | multi
-%%%
 job(Pid, NWorkers, MapFun, RedInput, Initial, Data) ->
-    {RedFun, Method} = RedInput,
-    Map = lists:map(MapFun, Data),
-    Reduce = lists:foldl(RedFun, Initial, Map),
-    {ok, Reduce}.
+    master:job(Pid, NWorkers, MapFun, RedInput, Initial, Data).
 
-stop(Pid) -> ok.
+stop(Pid) ->
+    master:stop(Pid).

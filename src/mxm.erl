@@ -43,7 +43,6 @@ total_words(Data) ->
     MapFun    = fun({_,Count}) -> Count end,
     ReduceFun = fun(Val, SumAcc) -> SumAcc + Val end,
     Initial = 0,
-
     CountsOnly = lists:map(MapFun, Data),
     lists:foldl(ReduceFun, Initial, CountsOnly).
 
